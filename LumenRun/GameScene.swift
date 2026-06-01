@@ -2206,6 +2206,7 @@ final class GameScene: SKScene {
         comboTimer = 0
         state.breakCombo()
         Haptics.fail(enabled: state.isHapticsEnabled)
+        SoundPlayer.voidBreak(enabled: state.isSoundEnabled)
         signalRing(at: player.position, color: objectColor(for: .void), radius: 54, duration: 0.22, lineWidth: 2)
         flash(color: objectColor(for: .void).withAlphaComponent(0.12))
         node.removeFromParent()

@@ -17,6 +17,7 @@ enum SoundPlayer {
         preload("timecore")
         preload("crash")
         preload("shieldbreak")
+        preload("voidbreak")
         preload("fever")
         preload("stageclear")
         preload("module")
@@ -45,6 +46,10 @@ enum SoundPlayer {
 
     static func shieldBreak(enabled: Bool) {
         play("shieldbreak", enabled: enabled)
+    }
+
+    static func voidBreak(enabled: Bool) {
+        play("voidbreak", enabled: enabled)
     }
 
     static func crash(enabled: Bool) {
@@ -151,6 +156,8 @@ enum SoundPlayer {
             minimumInterval = 0.45
         case "timecore":
             minimumInterval = 0.25
+        case "voidbreak":
+            minimumInterval = 0.28
         default:
             minimumInterval = 0
         }
@@ -169,7 +176,7 @@ enum SoundPlayer {
             return 0.74
         case "module", "shield", "timecore":
             return 0.64
-        case "crash", "shieldbreak":
+        case "crash", "shieldbreak", "voidbreak":
             return 0.7
         default:
             return 0.62

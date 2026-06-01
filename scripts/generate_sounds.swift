@@ -235,6 +235,14 @@ try writeWav(name: "shieldbreak.wav", duration: 0.38, stereo: false) { time in
     return (crack + drop, 0)
 }
 
+try writeWav(name: "voidbreak.wav", duration: 0.42, stereo: false) { time in
+    let env = envelope(time, attack: 0.002, decay: 0.1, sustain: 0.18, release: 0.18, duration: 0.42)
+    let warp = sine(310 - 170 * min(1, time / 0.42), time) * env * 0.34
+    let hollow = sine(92 + sin(twoPi * 5 * time) * 18, time) * env * 0.28
+    let staticGate = noise(time) * pulseEnvelope(time, length: 0.2, sharpness: 8) * 0.16
+    return (warp + hollow + staticGate, 0)
+}
+
 try writeWav(name: "crash.wav", duration: 0.5, stereo: false) { time in
     let env = envelope(time, attack: 0.001, decay: 0.16, sustain: 0.18, release: 0.2, duration: 0.5)
     let impact = noise(time) * exp(-time * 7) * 0.42

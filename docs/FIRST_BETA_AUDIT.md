@@ -225,6 +225,9 @@ Concrete tasks:
 Acceptance:
 - Players can tell "good pickup", "danger hit", and "combo disrupted" by sound.
 
+Progress:
+- 2026-06-01: Added a dedicated void-break sound path so combo disruption is semantically distinct from shard death, shield absorb, and normal utility pickups. Localization files were also linted for both Korean and English.
+
 ### 10. UI and Localization
 
 Problem:
