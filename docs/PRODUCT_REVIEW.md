@@ -32,3 +32,27 @@
 - What cosmetic reward fits the IP best: core skins, trails, orbit rings, or titles?
 - Should daily challenge be a launch feature or a post-launch retention update?
 
+## 2026-05-22 First Beta Midpoint Review
+
+### Current Strengths
+- The game now has a fuller loop: stages, relay cards, fever, items, achievements, daily missions, rewards, localization, and Game Center groundwork.
+- The simple one-touch control still gives the game a strong mobile-friendly foundation.
+- Stage clears and relay cards give the run a roguelike rhythm.
+- The object system is deep enough to create patterns and long-term variety.
+
+### Main Beta Risk
+- The game is now at risk of becoming hard to read. More objects and systems are valuable only if players can understand them instantly.
+- The object guide is not enough. The run itself must teach collect, danger, and disrupt roles through shape, animation, color, and feedback.
+
+### Updated Beta Priorities
+1. Object readability redesign: collect/danger/disrupt visual grammar.
+2. Stage teaching order: basic rhythm first, pulse at stage 3, void at stage 5.
+3. Pattern pass for pulse, void, and safe-lane gates.
+4. Real-device performance soak after adding moving hazards and visual telegraphs.
+5. Relay card clarity and build feedback.
+6. Daily mission and achievement target tuning.
+7. Start/reward/game-over polish for friend beta.
+
+### Decision
+- Treat object readability as the next highest-priority beta blocker.
+- Do not add more object types until the current object set can be read without memorization.

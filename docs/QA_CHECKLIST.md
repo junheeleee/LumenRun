@@ -21,6 +21,8 @@ Use this checklist before important commits, TestFlight builds, and App Store re
 - Respawn does not place the player into immediate repeated collision.
 - Game-over shrink animation does not persist into the next run.
 - Obstacles do not spawn directly into unavoidable forward collision.
+- Collectible objects, lethal hazards, and combo-disrupting blockers are visually distinguishable during motion without reading the object guide.
+- New advanced hazards are introduced after the player has learned the basic collect/avoid rhythm.
 - Fever mode grants invincibility.
 - Fever collisions convert into score.
 - Shield item visibly protects the player.
@@ -32,6 +34,8 @@ Use this checklist before important commits, TestFlight builds, and App Store re
 - Relay card rarity badges are readable.
 - Risk cards clearly show both the tempting upside and the downside.
 - Stage 2 and later routes feel visually or structurally different from stage 1.
+- Pulse hazards are readable as moving danger, not as collectible orange items.
+- Void rings are readable as combo-disrupting blockers, not instant-death hazards.
 - Selected relay cards appear in the HUD as a readable build summary.
 - Next-stage route intro appears briefly and does not block controls.
 

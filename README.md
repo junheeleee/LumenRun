@@ -2,7 +2,7 @@
 
 Lumen Run is a one-touch iOS neon arcade game built with SwiftUI and SpriteKit.
 
-Tap to shift through three orbit depths. Collect lumen sparks, dodge glitch shards, trigger Fever Sync, and chase a persistent best score.
+Tap to shift through three orbit depths. Carry the Relay Core, recover Lumen Sparks, dodge Glitch Shards, trigger Oversync, and chase a persistent best score.
 
 ## Open
 

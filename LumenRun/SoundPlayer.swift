@@ -10,6 +10,7 @@ enum SoundPlayer {
     static func configure() {
         try? AVAudioSession.sharedInstance().setCategory(.ambient, mode: .default, options: [])
         try? AVAudioSession.sharedInstance().setActive(true)
+        preload("start")
         preload("tap")
         preload("lumen")
         preload("shield")
@@ -17,7 +18,13 @@ enum SoundPlayer {
         preload("crash")
         preload("shieldbreak")
         preload("fever")
+        preload("stageclear")
+        preload("module")
         preloadMusic()
+    }
+
+    static func startRun(enabled: Bool) {
+        play("start", enabled: enabled)
     }
 
     static func tap(enabled: Bool) {
@@ -46,6 +53,14 @@ enum SoundPlayer {
 
     static func feverStart(enabled: Bool) {
         play("fever", enabled: enabled)
+    }
+
+    static func stageClear(enabled: Bool) {
+        play("stageclear", enabled: enabled)
+    }
+
+    static func moduleSelect(enabled: Bool) {
+        play("module", enabled: enabled)
     }
 
     static func setMusicEnabled(_ enabled: Bool) {
@@ -88,6 +103,7 @@ enum SoundPlayer {
         guard players[name] == nil else { return }
         guard let url = Bundle.main.url(forResource: name, withExtension: "wav") else { return }
         guard let player = try? AVAudioPlayer(contentsOf: url) else { return }
+        player.volume = volume(for: name)
         player.prepareToPlay()
         players[name] = player
     }
@@ -97,14 +113,14 @@ enum SoundPlayer {
         guard let url = Bundle.main.url(forResource: "background", withExtension: "wav") else { return }
         guard let player = try? AVAudioPlayer(contentsOf: url) else { return }
         player.numberOfLoops = -1
-        player.volume = 0.32
+        player.volume = 0.27
         player.prepareToPlay()
         musicPlayer = player
 
         if let feverURL = Bundle.main.url(forResource: "feverloop", withExtension: "wav"),
            let feverPlayer = try? AVAudioPlayer(contentsOf: feverURL) {
             feverPlayer.numberOfLoops = -1
-            feverPlayer.volume = 0.38
+            feverPlayer.volume = 0.34
             feverPlayer.prepareToPlay()
             feverMusicPlayer = feverPlayer
         }
@@ -124,9 +140,15 @@ enum SoundPlayer {
         let minimumInterval: TimeInterval
         switch name {
         case "lumen":
-            minimumInterval = isFeverActive ? 0.07 : 0.035
+            minimumInterval = isFeverActive ? 0.1 : 0.075
         case "tap":
             minimumInterval = 0.035
+        case "module":
+            minimumInterval = 0.18
+        case "stageclear":
+            minimumInterval = 0.7
+        case "start":
+            minimumInterval = 0.45
         case "timecore":
             minimumInterval = 0.25
         default:
@@ -135,5 +157,22 @@ enum SoundPlayer {
 
         guard minimumInterval > 0 else { return true }
         return now - (lastPlayTimes[name] ?? -10) >= minimumInterval
+    }
+
+    private static func volume(for name: String) -> Float {
+        switch name {
+        case "tap":
+            return 0.46
+        case "lumen", "collect":
+            return 0.58
+        case "start", "stageclear", "fever":
+            return 0.74
+        case "module", "shield", "timecore":
+            return 0.64
+        case "crash", "shieldbreak":
+            return 0.7
+        default:
+            return 0.62
+        }
     }
 }

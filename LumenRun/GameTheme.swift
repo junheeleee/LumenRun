@@ -42,6 +42,17 @@ enum GameTheme: String, CaseIterable, Identifiable {
         }
     }
 
+    var sceneBackgroundColor: SKColor {
+        switch self {
+        case .aurora:
+            return SKColor(red: 0.025, green: 0.035, blue: 0.075, alpha: 1)
+        case .solar:
+            return SKColor(red: 0.08, green: 0.035, blue: 0.055, alpha: 1)
+        case .mono:
+            return SKColor(red: 0.035, green: 0.04, blue: 0.07, alpha: 1)
+        }
+    }
+
     var feverColors: [Color] {
         switch self {
         case .aurora:

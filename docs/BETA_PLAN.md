@@ -9,11 +9,15 @@ This document defines the target for the first playable beta. The goal is not Ap
 - Keep early play readable and fair.
 - Make cards feel like the beginning of a roguelike deckbuilding layer.
 - Prioritize smooth device performance over extra visual noise.
+- Make every object readable by role in motion: collect, danger, or disrupt.
 
 ## Beta Readiness Checklist
 - [ ] A real iPhone can play for 5 minutes without noticeable frame drops.
 - [ ] A real iPhone can reach stage 3 without broken UI, invisible player state, or stuck pause state.
 - [ ] Stage 1 feels readable and not too punishing.
+- [ ] A new player can tell good objects from dangerous/disruptive objects without opening the object guide.
+- [ ] Collect, danger, and disrupt objects use clearly different shape language, not only different colors.
+- [ ] Pulse and void are introduced gradually with readable telegraphing.
 - [ ] Stage clear feels like a real checkpoint, not only a pause popup.
 - [ ] Card choices do not appear too often.
 - [ ] Card choices do not repeat in a boring pattern.
@@ -45,11 +49,14 @@ Run this script on device after every major gameplay/balance commit.
 - Stage target score may still need tuning after real play.
 - Relay cards now have rarity and risk picks, but still need real-device tuning for whether downsides feel fair.
 - Stage themes currently change visual tone and opening route, but later should add clearer stage-specific rules.
+- Object count has grown. The object guide is useful, but in-run readability must be solved before broad beta.
 - App icon and start/loading branding now share the Lumen core, relay orbit, and signal node language, but still need small-size device review.
 - Game Center leaderboard still depends on App Store Connect setup.
 - App Store release needs metadata, screenshots, privacy review, and final signing checks.
 
 ## Next Beta Work
+- Start with object readability redesign: collect/danger/disrupt visual categories.
+- Add a stage unlock/teaching table for advanced hazards.
 - Do a device performance pass after 5-minute runs.
 - Tune risk card frequency after friend playtests.
 - Prepare TestFlight/App Store Connect checklist once the gameplay loop survives playtesting.

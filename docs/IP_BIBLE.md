@@ -1,44 +1,67 @@
 # Lumen Run IP Bible
 
-This document keeps the game identity consistent across title, visuals, sound, UI, effects, and App Store materials.
+This document defines the first-pass identity system for Lumen Run. It is the source of truth for user-facing naming, tone, and visual meaning.
 
-## Current Direction
-- Genre: one-touch sci-fi orbit runner.
-- Fantasy: relaying a fading lumen core through a collapsing glitch orbit.
-- Mood: fast, bright, sleek, energetic, readable, urgent.
-- Visual keywords: luminous core, orbital signal rings, magenta glitch shards, teal relay light, speed streaks, fever burst, shield aura.
-- Audio keywords: fast BPM, sci-fi synth, clear arcade feedback, fever escalation.
+## Core Premise
 
-## Identity Rules
-- The first visible brand signal should be the core/orbit/shard triangle: what the player controls, where they move, and what threatens them.
-- In-run orbit lanes should read as a signal network, using broken relay segments and small signal nodes rather than plain decorative circles.
-- The player core should carry an inner lumen signal mark so it feels like the same object promised by the icon and title screen.
-- Objects should look meaningfully different by gameplay role.
-- Item pickup, collision, fever, shield, and score feedback should be easy to distinguish.
-- Spark collection should read as a small relay signal, power-up pickup as a stronger system pulse, and glitch collisions/clears as fractured shard energy.
-- Fever should feel like a dramatic power state, not just a stat change.
-- Fever should communicate overcharge, conversion, and danger return: entry radiates from the core, glitch hits convert magenta energy into lumen energy, and the final second warns the player visually.
-- UI should support the sci-fi identity without hurting readability.
-- Menu screens should feel like entering a signal system, not reading a generic mobile-game card.
+Lumen Run is about carrying a fading signal through a collapsing orbital network.
 
-## App Icon Direction
-- Dark signal-space background.
-- Large luminous core as the main readable shape.
-- Two or three crossing orbit rings to communicate the circular movement rule.
-- One magenta glitch shard near the outer ring to communicate danger.
-- Small gold sparks can support the score fantasy, but should not compete with the core.
+The player is not "a lumen." The player is the Relay Core: a small signal carrier trying to keep the last light moving. Lumen is the recoverable energy scattered through the orbit. Glitch is the corruption breaking the network.
 
-## Open Questions
-- Final title confirmation: Lumen Run or another name?
-- Main character/object silhouette.
-- App icon direction.
-- Fever mode color language.
-- Long-term collectible or progression theme.
-- Cosmetic unlock identity: core skins, orbit trails, badges, or ship-like avatars?
-- Leaderboard framing: pure score competition, weekly challenge, or friend rivalry?
+## Naming Rules
 
-## Avoid
-- Generic abstract shapes with no role clarity.
-- Mixed audio styles that feel unrelated.
-- Visual effects that hide obstacles.
-- Overly dark backgrounds that reduce gameplay readability.
+| Concept | Korean | English | Notes |
+| --- | --- | --- | --- |
+| Game | 루멘런 | Lumen Run | Keep the title simple and readable. |
+| Player | 릴레이 코어 | Relay Core | The controllable object. Avoid calling it just "lumen." |
+| Score pickup | 루멘 스파크 | Lumen Spark | Basic collectible light/signal fragment. |
+| Big score pickup | 오버차지 코어 | Overcharge Core | Greedy reward object. |
+| Protection pickup | 실드 필드 | Shield Field | Defensive pickup/effect. |
+| Slow pickup | 타임 코어 | Time Core | Time-reading utility. |
+| Magnet pickup | 자력 코어 | Magnet Core | Pulls scattered lumen sparks. |
+| Clear pickup | 클리어 코어 | Clear Core | Clears nearby glitch hazards. |
+| Lethal hazard | 글리치 샤드 | Glitch Shard | Sharp corruption. Same-orbit collision is fatal unless protected. |
+| Moving hazard | 펄스 샤드 | Pulse Shard | A moving glitch shard. |
+| Combo disruptor | 보이드 게이트 | Void Gate | Disrupts signal/combo without ending the run. |
+| Fever state | 오버싱크 | Oversync | The Relay Core temporarily overclocks and turns danger into score. |
+| Stage | 루트 | Route | User-facing UI may still show ST for compact HUD, but route language should carry the fantasy. |
+| Upgrade card | 릴레이 모듈 | Relay Module | Stage-clear build choice. |
+| Start card | 시동 모듈 | Ignition Module | First-run strategic starting condition. |
+
+## Tone
+
+- Short, urgent, and signal-like.
+- Prefer verbs like relay, sync, ignite, overload, carry, fracture, stabilize.
+- Avoid long lore paragraphs in gameplay UI.
+- Korean copy can mix short English nouns only when they are already genre-readable: Core, Sync, Route, Module.
+- Do not introduce new noun families unless they clarify gameplay.
+
+## Visual Language
+
+- Good objects should have rounder forms and positive `+` markers.
+- Lethal glitch objects should use sharp silhouettes and warning frames.
+- Disruptive objects should look broken, gated, or interrupted rather than lethal.
+- The brand mark is the Relay Core plus orbit lines plus signal nodes.
+- The icon, loading mark, start mark, object guide, and in-game core should all feel like the same signal network.
+
+## Brand Mark Rules
+
+- The app icon and start/loading mark should prioritize the Relay Core at the center of three route rings.
+- Route rings should read as playable paths, not decorative atom or planet orbits.
+- Lumen Sparks should carry the small positive `+` badge whenever space allows.
+- Glitch Shards should carry a triangular warning frame so danger is readable without relying only on red or magenta color.
+- Void Gates should use interrupted purple arc language and a broken-signal mark, not the same danger frame as lethal hazards.
+- Background signal lines may exist, but they should stay subtle so they do not compete with the core silhouette.
+
+## Audio Language
+
+- The core music identity is fast, bright, synthetic, and loopable: signal pulses over a dark orbital bed.
+- Normal music should feel like a controlled relay run, while Oversync music should feel faster and more urgent.
+- Lumen Spark collection should be a short bright ping, not a generic coin sound.
+- Relay Module and Ignition Module choices should sound like a module locking into the route system.
+- Route clear should have its own positive chime so the player feels a stage has truly ended.
+- Glitch hits should stay lower, noisier, and more broken than helpful object sounds.
+
+## Current First-Pass Decision
+
+Keep the game title as Lumen Run for now. The title is short, pronounceable, and still works once "lumen" is defined as the collectible signal energy rather than the player character.
