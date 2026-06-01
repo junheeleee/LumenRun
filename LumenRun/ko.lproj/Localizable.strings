@@ -29,7 +29,7 @@
 "objectHint.new" = "새 신호";
 "routeSignal.title" = "이번 루트 신호";
 "routeSignal.role.collect" = "회수";
-"routeSignal.role.power" = "지원";
+"routeSignal.role.power" = "코어";
 "routeSignal.role.avoid" = "피하기";
 "routeSignal.role.disrupt" = "콤보 위험";
 
@@ -64,7 +64,7 @@
 "startCard.magnet.synergy" = "연계: 궤도/수확 모듈이 잘 맞습니다.";
 "startCard.combo.title" = "싱크 예열 모듈";
 "startCard.combo.desc" = "콤보 4부터 시작합니다.";
-"startCard.combo.synergy" = "연계: 피버/콤보 모듈이 잘 맞습니다.";
+"startCard.combo.synergy" = "연계: 싱크/콤보 모듈이 잘 맞습니다.";
 "startCard.rush.title" = "루멘 증폭 모듈";
 "startCard.rush.desc" = "첫 루트에서 10초간 루멘 스파크가 추가 생성됩니다.";
 "startCard.rush.synergy" = "연계: 점수 수확 모듈이 잘 맞습니다.";
@@ -81,7 +81,7 @@
 "tutorial.title" = "릴레이 프로토콜";
 "tutorial.body" = "궤도를 읽고, 루멘 신호를 회수하고, 붕괴하는 루트에서 버티세요.";
 "tutorial.step.tap" = "탭하면 궤도가 1-2-3-2-1 순서로 바뀝니다.";
-"tutorial.step.collect" = "금색 루멘 스파크는 콤보, 주황 코어는 큰 점수를 줍니다.";
+"tutorial.step.collect" = "금색 루멘 스파크는 콤보, 오버차지 코어는 큰 점수를 줍니다.";
 "tutorial.step.avoid" = "마젠타 글리치 샤드는 같은 궤도일 때만 위험합니다.";
 "tutorial.step.powerups" = "파란 실드 필드는 보호하고, 보라 타임 코어는 시간을 늦춥니다.";
 "tutorial.step.fever" = "오버싱크 중에는 무적이며 충돌도 점수가 됩니다.";
@@ -179,8 +179,8 @@
 "missions.shields" = "실드 %d개 획득";
 "missions.combo" = "한 릴레이에서 콤보 %d회 달성";
 "missions.stages" = "루트 %d까지 생존";
-"missions.surges" = "서지 아이템 %d개 수집";
-"missions.bombs" = "봄 클리어 %d회 달성";
+"missions.surges" = "오버차지 코어 %d개 회수";
+"missions.bombs" = "클리어 코어 %d회 발동";
 "missions.todayProgress" = "오늘 %d/%d";
 "missions.todayComplete" = "오늘 미션 완료";
 
@@ -231,13 +231,13 @@
 "upgrade.slow.desc" = "잠시 시간이 느려져 위험 패턴을 읽기 쉬워집니다.";
 "upgrade.fever.title" = "오버싱크 충전";
 "upgrade.fever.desc" = "오버싱크에 가까워지거나 오버싱크 시간을 연장합니다.";
-"upgrade.score.title" = "점수 서지";
+"upgrade.score.title" = "루멘 부스트";
 "upgrade.score.desc" = "즉시 보너스 점수를 얻어 기록을 밀어 올립니다.";
 "upgrade.combo.title" = "콤보 엔진";
 "upgrade.combo.desc" = "콤보를 올려 다음 오버싱크와 점수 배수에 가까워집니다.";
 "upgrade.overclock.title" = "위험한 오버클럭";
 "upgrade.overclock.desc" = "점수와 콤보를 크게 얻지만 다음 구간 목표도 빠르게 다가옵니다.";
-"upgrade.volatile.title" = "휘발성 서지";
+"upgrade.volatile.title" = "휘발성 코어";
 "upgrade.volatile.desc" = "점수와 콤보를 크게 얻지만 보유 실드를 모두 태웁니다.";
 "upgrade.compression.title" = "압축 게이트";
 "upgrade.compression.desc" = "큰 점수를 얻는 대신 다음 루트가 더 빨리 찾아옵니다.";
@@ -305,8 +305,8 @@
 "achievements.surviveStage5.desc" = "루트 5까지 생존하세요.";
 "achievements.surviveStage10.title" = "루트 10 신호";
 "achievements.surviveStage10.desc" = "루트 10까지 생존하세요.";
-"achievements.bombClear.title" = "깔끔한 폭발";
-"achievements.bombClear.desc" = "클리어 코어로 글리치 샤드를 제거하세요.";
+"achievements.bombClear.title" = "클리어 코어";
+"achievements.bombClear.desc" = "클리어 코어를 발동해 글리치 샤드를 제거하세요.";
 "achievements.magnetCollect50.title" = "자석 마스터";
 "achievements.magnetCollect50.desc" = "자력 코어가 활성화된 동안 루멘 스파크를 누적 50개 수집하세요.";
 "achievements.shieldSave10.title" = "실드 세이브";

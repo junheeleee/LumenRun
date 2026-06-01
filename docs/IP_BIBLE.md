@@ -10,6 +10,18 @@ The player is not "a lumen." The player is the Relay Core: a small signal carrie
 
 ## Naming Rules
 
+Use the smallest possible public vocabulary. New players should only need to learn these seven families:
+
+1. **Relay Core**: the player.
+2. **Lumen Spark**: basic score energy.
+3. **Core**: helpful or high-value pickup.
+4. **Glitch Shard**: lethal hazard.
+5. **Void Gate**: combo-disrupting blocker.
+6. **Oversync**: temporary invincible scoring state.
+7. **Relay Module**: build choice.
+
+Internal implementation names can stay as code terms, but user-facing text should avoid leaking them unless they are already canonical below.
+
 | Concept | Korean | English | Notes |
 | --- | --- | --- | --- |
 | Game | 루멘런 | Lumen Run | Keep the title simple and readable. |
@@ -25,8 +37,19 @@ The player is not "a lumen." The player is the Relay Core: a small signal carrie
 | Combo disruptor | 보이드 게이트 | Void Gate | Disrupts signal/combo without ending the run. |
 | Fever state | 오버싱크 | Oversync | The Relay Core temporarily overclocks and turns danger into score. |
 | Stage | 루트 | Route | User-facing UI may still show ST for compact HUD, but route language should carry the fantasy. |
-| Upgrade card | 릴레이 모듈 | Relay Module | Stage-clear build choice. |
+| Upgrade card | 릴레이 모듈 | Relay Module | Route-clear build choice. |
 | Start card | 시동 모듈 | Ignition Module | First-run strategic starting condition. |
+
+## Avoid In User-Facing Copy
+
+| Avoid | Use Instead | Reason |
+| --- | --- | --- |
+| Fever | Oversync / 오버싱크 | Fever is a generic genre term; Oversync is the IP term. |
+| Stage | Route / 루트 | Route better fits the orbit-network fantasy. Compact HUD may still use ST if space is tight. |
+| Surge item | Overcharge Core / 오버차지 코어 | Surge is too generic and overlaps with module names. |
+| Bomb | Clear Core / 클리어 코어 | The object is a route-system core, not a conventional bomb. |
+| Power-up | Core / Field / Module | Keep the signal-network vocabulary consistent. |
+| Lumen as the player | Relay Core / 릴레이 코어 | Lumen is energy, not the controllable character. |
 
 ## Tone
 
@@ -59,7 +82,7 @@ The player is not "a lumen." The player is the Relay Core: a small signal carrie
 - Normal music should feel like a controlled relay run, while Oversync music should feel faster and more urgent.
 - Lumen Spark collection should be a short bright ping, not a generic coin sound.
 - Relay Module and Ignition Module choices should sound like a module locking into the route system.
-- Route clear should have its own positive chime so the player feels a stage has truly ended.
+- Route clear should have its own positive chime so the player feels a route has truly ended.
 - Glitch hits should stay lower, noisier, and more broken than helpful object sounds.
 
 ## Current First-Pass Decision
