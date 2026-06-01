@@ -591,6 +591,17 @@ final class GameState: ObservableObject {
         Array(runRecords.sorted { $0.date > $1.date }.prefix(5))
     }
 
+    var totalRecordedRuns: Int {
+        runRecords.count
+    }
+
+    var recentAverageScore: Int {
+        let recent = recentRunRecords
+        guard !recent.isEmpty else { return 0 }
+        let total = recent.reduce(0) { $0 + $1.score }
+        return Int((Double(total) / Double(recent.count)).rounded())
+    }
+
     var didSetNewBestThisRun: Bool {
         isGameOver && score > previousBestScore
     }

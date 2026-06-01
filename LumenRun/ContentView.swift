@@ -3682,6 +3682,11 @@ private struct RecordsView: View {
     var body: some View {
         NavigationStack {
             List {
+                Section {
+                    RecordsSummaryPanel()
+                        .listRowInsets(EdgeInsets(top: 10, leading: 14, bottom: 10, trailing: 14))
+                }
+
                 Section("records.top") {
                     if gameState.topRunRecords.isEmpty {
                         Text("records.empty")
@@ -3713,6 +3718,33 @@ private struct RecordsView: View {
                 }
             }
         }
+    }
+}
+
+private struct RecordsSummaryPanel: View {
+    @EnvironmentObject private var gameState: GameState
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Label("records.summary", systemImage: "chart.line.uptrend.xyaxis")
+                .font(.caption.weight(.black))
+                .foregroundStyle(Color(red: 0.0, green: 0.92, blue: 0.82))
+
+            HStack(spacing: 8) {
+                ResultStatCard(title: "records.runs", value: "\(gameState.totalRecordedRuns)", icon: "repeat.circle.fill")
+                ResultStatCard(title: "hud.best", value: "\(gameState.bestScore)", icon: "trophy.fill")
+            }
+
+            HStack(spacing: 8) {
+                ResultStatCard(title: "records.recentAverage", value: "\(gameState.recentAverageScore)", icon: "speedometer")
+                ResultStatCard(title: "achievements.title", value: "\(gameState.completedAchievementCount)/\(AchievementDefinition.all.count)", icon: "medal.fill")
+            }
+
+            Text("records.summaryHint")
+                .font(.caption2.weight(.semibold))
+                .foregroundStyle(.secondary)
+        }
+        .padding(.vertical, 4)
     }
 }
 

@@ -167,6 +167,10 @@
 "records.score" = "%d점";
 "records.empty" = "아직 기록된 릴레이가 없습니다.";
 "records.reset" = "릴레이 기록 초기화";
+"records.summary" = "로컬 비교";
+"records.runs" = "런 수";
+"records.recentAverage" = "최근 평균";
+"records.summaryHint" = "게임 센터 순위표 전까지 이 기록을 오프라인 비교 기준으로 사용하세요.";
 
 "missions.title" = "오늘의 미션";
 "missions.score" = "%d점 도달";

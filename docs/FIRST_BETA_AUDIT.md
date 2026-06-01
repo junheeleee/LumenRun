@@ -188,6 +188,9 @@ Acceptance:
 - Beta testers can at minimum compare local best/run history.
 - App Store/TestFlight path can later activate Game Center without redesigning the results flow.
 
+Progress:
+- 2026-06-01: Added a local comparison summary to the records screen. Free/dev builds now show total runs, best score, recent average, and achievement completion as an offline benchmark while Game Center setup remains unavailable.
+
 ## Priority 3: Presentation Polish
 
 ### 8. Start, Loading, Icon, and IP Cohesion

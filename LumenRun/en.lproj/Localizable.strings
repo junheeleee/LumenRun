@@ -167,6 +167,10 @@
 "records.score" = "%d pts";
 "records.empty" = "No relays recorded yet.";
 "records.reset" = "Reset Relay History";
+"records.summary" = "Local Comparison";
+"records.runs" = "Runs";
+"records.recentAverage" = "Recent Avg";
+"records.summaryHint" = "Use this as the offline benchmark until Game Center leaderboards are available.";
 
 "missions.title" = "Daily Missions";
 "missions.score" = "Reach %d points";
