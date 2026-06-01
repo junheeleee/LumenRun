@@ -100,3 +100,7 @@ Internal implementation names can stay as code terms, but user-facing text shoul
 ## Current First-Pass Decision
 
 Keep the game title as Lumen Run for now. The title is short, pronounceable, and still works once "lumen" is defined as the collectible signal energy rather than the player character.
+
+## Release Visual QA
+
+Use `docs/APP_STORE_VISUAL_CHECKLIST.md` before beta screenshots, App Store screenshots, icon refreshes, and major start-screen changes.
