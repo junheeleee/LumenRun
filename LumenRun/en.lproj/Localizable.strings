@@ -101,7 +101,9 @@
 "gameover.tiedBest" = "Matched your best";
 "gameover.bestDelta" = "%d pts from best";
 "gameover.nextTheme" = "Complete %d more missions to unlock %@";
+"gameover.nextReward" = "Complete %d more missions to unlock %@";
 "gameover.allThemesUnlocked" = "All themes unlocked";
+"gameover.allRewardsUnlocked" = "All rewards unlocked";
 "gameover.feedback.newBest" = "Relay Highlight";
 "gameover.feedback.deepRun" = "Deep Route Reached";
 "gameover.feedback.build" = "Build Came Online";
@@ -175,6 +177,8 @@
 "missions.stages" = "Survive to Route %d";
 "missions.surges" = "Collect %d surge items";
 "missions.bombs" = "Trigger %d bomb clears";
+"missions.todayProgress" = "Today %d/%d";
+"missions.todayComplete" = "Today's missions complete";
 
 "upgrade.stageCleared" = "Route %d Cleared";
 "upgrade.title" = "Relay Module Pick";
@@ -321,6 +325,9 @@
 "rewards.remaining" = "%d missions left";
 "rewards.equipped" = "Equipped";
 "rewards.tapToEquip" = "Tap to Equip";
+"rewards.nextShort" = "%d to %@";
+"rewards.nextReady" = "%@ ready";
+"rewards.allUnlocked" = "All rewards unlocked";
 
 "theme.aurora" = "Neon Tide";
 "theme.solar" = "Solar Rift";

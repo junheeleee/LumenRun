@@ -2478,20 +2478,23 @@ private struct GameOverView: View {
                 gameState.dailyMissions.count - gameState.completedDailyMissionTotal
             )
         }
-        if let remaining = gameState.missionsUntilNextTheme, remaining > 0 {
+        if let remaining = gameState.missionsUntilNextReward, remaining > 0 {
             return String(format: NSLocalizedString("gameover.nextGoal.reward", comment: ""), remaining)
         }
         return NSLocalizedString("gameover.nextGoal.stage", comment: "")
     }
 
     private var unlockText: String? {
-        guard let nextTheme = gameState.nextLockedTheme, let remaining = gameState.missionsUntilNextTheme else {
-            return NSLocalizedString("gameover.allThemesUnlocked", comment: "")
+        guard
+            let titleKey = gameState.nextLockedRewardTitleLocalizationKey,
+            let remaining = gameState.missionsUntilNextReward
+        else {
+            return NSLocalizedString("gameover.allRewardsUnlocked", comment: "")
         }
         return String(
-            format: NSLocalizedString("gameover.nextTheme", comment: ""),
+            format: NSLocalizedString("gameover.nextReward", comment: ""),
             remaining,
-            NSLocalizedString(nextTheme.titleLocalizationKey, comment: "")
+            NSLocalizedString(titleKey, comment: "")
         )
     }
 }
@@ -3535,9 +3538,67 @@ private struct DailyMissionsPanel: View {
                     MissionRow(mission: mission)
                 }
             }
+
+            MissionRewardProgress(isCompact: isCompact)
         }
         .padding(12)
         .background(.black.opacity(0.16), in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+    }
+}
+
+private struct MissionRewardProgress: View {
+    @EnvironmentObject private var gameState: GameState
+    var isCompact = false
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 7) {
+            HStack(spacing: 8) {
+                Label(todayProgressText, systemImage: gameState.completedDailyMissionTotal >= gameState.dailyMissions.count ? "checkmark.seal.fill" : "calendar")
+                    .font(.caption2.weight(.black))
+                    .foregroundStyle(.white.opacity(0.72))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.78)
+
+                Spacer(minLength: 8)
+
+                Text(rewardText)
+                    .font(.caption2.weight(.black))
+                    .foregroundStyle(Color(red: 1.0, green: 0.82, blue: 0.28))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.72)
+            }
+
+            ProgressView(value: gameState.nextRewardProgress)
+                .tint(Color(red: 1.0, green: 0.82, blue: 0.28))
+                .scaleEffect(x: 1, y: isCompact ? 0.62 : 0.72, anchor: .center)
+        }
+        .padding(.top, 2)
+    }
+
+    private var todayProgressText: String {
+        if gameState.completedDailyMissionTotal >= gameState.dailyMissions.count {
+            return NSLocalizedString("missions.todayComplete", comment: "")
+        }
+        return String(
+            format: NSLocalizedString("missions.todayProgress", comment: ""),
+            gameState.completedDailyMissionTotal,
+            gameState.dailyMissions.count
+        )
+    }
+
+    private var rewardText: String {
+        guard
+            let titleKey = gameState.nextLockedRewardTitleLocalizationKey,
+            let remaining = gameState.missionsUntilNextReward
+        else {
+            return NSLocalizedString("rewards.allUnlocked", comment: "")
+        }
+
+        let title = NSLocalizedString(titleKey, comment: "")
+        if remaining <= 0 {
+            return String(format: NSLocalizedString("rewards.nextReady", comment: ""), title)
+        }
+        return String(format: NSLocalizedString("rewards.nextShort", comment: ""), remaining, title)
     }
 }
 

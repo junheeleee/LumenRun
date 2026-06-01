@@ -101,7 +101,9 @@
 "gameover.tiedBest" = "최고 기록과 동률";
 "gameover.bestDelta" = "최고 기록까지 %d점";
 "gameover.nextTheme" = "%d개 미션을 더 완료하면 %@ 해금";
+"gameover.nextReward" = "%d개 미션을 더 완료하면 %@ 해금";
 "gameover.allThemesUnlocked" = "모든 테마가 해금되었습니다";
+"gameover.allRewardsUnlocked" = "모든 리워드가 해금되었습니다";
 "gameover.feedback.newBest" = "이번 릴레이 하이라이트";
 "gameover.feedback.deepRun" = "깊은 루트 진입";
 "gameover.feedback.build" = "빌드가 살아났습니다";
@@ -175,6 +177,8 @@
 "missions.stages" = "루트 %d까지 생존";
 "missions.surges" = "서지 아이템 %d개 수집";
 "missions.bombs" = "봄 클리어 %d회 달성";
+"missions.todayProgress" = "오늘 %d/%d";
+"missions.todayComplete" = "오늘 미션 완료";
 
 "upgrade.stageCleared" = "루트 %d 클리어";
 "upgrade.title" = "릴레이 모듈 선택";
@@ -321,6 +325,9 @@
 "rewards.remaining" = "미션 %d개 남음";
 "rewards.equipped" = "장착중";
 "rewards.tapToEquip" = "탭해서 장착";
+"rewards.nextShort" = "%d개 남음: %@";
+"rewards.nextReady" = "%@ 준비됨";
+"rewards.allUnlocked" = "모든 리워드 해금";
 
 "theme.aurora" = "네온 타이드";
 "theme.solar" = "솔라 리프트";

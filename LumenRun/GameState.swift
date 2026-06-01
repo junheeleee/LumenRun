@@ -616,6 +616,42 @@ final class GameState: ObservableObject {
         return max(0, nextLockedTheme.unlockRequirement - completedMissionCount)
     }
 
+    var nextLockedRewardTitleLocalizationKey: String? {
+        nextLockedRewardCandidate?.titleKey
+    }
+
+    var nextLockedRewardRequirement: Int? {
+        nextLockedRewardCandidate?.requirement
+    }
+
+    var missionsUntilNextReward: Int? {
+        guard let requirement = nextLockedRewardRequirement else { return nil }
+        return max(0, requirement - completedMissionCount)
+    }
+
+    var nextRewardProgress: Double {
+        guard let requirement = nextLockedRewardRequirement, requirement > 0 else { return 1 }
+        return min(1, Double(completedMissionCount) / Double(requirement))
+    }
+
+    private var nextLockedRewardCandidate: (titleKey: String, requirement: Int)? {
+        let themeCandidates = GameTheme.allCases
+            .filter { !isThemeUnlocked($0) }
+            .map { ($0.titleLocalizationKey, $0.unlockRequirement) }
+        let skinCandidates = CoreSkin.allCases
+            .filter { !isCoreSkinUnlocked($0) }
+            .map { ($0.titleLocalizationKey, $0.unlockRequirement) }
+
+        return (themeCandidates + skinCandidates)
+            .sorted {
+                if $0.1 == $1.1 {
+                    return $0.0 < $1.0
+                }
+                return $0.1 < $1.1
+            }
+            .first
+    }
+
     init() {
         let defaults = UserDefaults.standard
         let loadedBestScore = defaults.integer(forKey: bestScoreKey)

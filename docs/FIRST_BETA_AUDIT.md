@@ -171,6 +171,9 @@ Concrete tasks:
 Acceptance:
 - A player sees one realistic short-term goal before starting another run.
 
+Progress:
+- 2026-06-01: Improved the mission/reward loop visibility. Daily mission panels now show today's completion count plus a next-reward progress bar, and game-over reward prompts now consider both themes and core skins instead of only themes.
+
 ### 7. Social Comparison
 
 Status:
