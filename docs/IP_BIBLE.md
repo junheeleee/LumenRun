@@ -85,6 +85,7 @@ Internal implementation names can stay as code terms, but user-facing text shoul
 - Relay Module cards should read like hardware slots: role header, icon, rarity/tag chips, effect text, and a clear pick action.
 - Risk modules should always show a visible warning color or socket mark before the player reads the detailed text.
 - HUD and results panels should prefer functional scan speed over decoration.
+- The in-run HUD should stay limited to score, route progress, Oversync/buff state, and pause/settings controls. Secondary destinations should not compete with gameplay.
 
 ## Audio Language
 

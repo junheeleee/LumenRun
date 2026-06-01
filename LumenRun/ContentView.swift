@@ -138,9 +138,6 @@ struct ContentView: View {
                     openSettings: {
                         gameState.pauseForSettings()
                     },
-                    openAchievements: {
-                        gameState.showAchievements()
-                    },
                     togglePause: {
                         gameState.togglePause()
                     }
@@ -1078,7 +1075,6 @@ private struct AchievementToastView: View {
 private struct HUDView: View {
     @EnvironmentObject private var gameState: GameState
     let openSettings: () -> Void
-    let openAchievements: () -> Void
     let togglePause: () -> Void
 
     var body: some View {
@@ -1091,13 +1087,12 @@ private struct HUDView: View {
                     isPaused: gameState.isUserPaused,
                     isDisabled: !gameState.hasSeenTutorial || gameState.isGameOver,
                     openSettings: openSettings,
-                    openAchievements: openAchievements,
                     togglePause: togglePause
                 )
             }
 
             HStack(alignment: .center, spacing: 8) {
-                RelayStatusStrip()
+                RelayProgressPanel()
 
                 Spacer(minLength: 4)
 
@@ -1187,7 +1182,6 @@ private struct HUDActionCluster: View {
     let isPaused: Bool
     let isDisabled: Bool
     let openSettings: () -> Void
-    let openAchievements: () -> Void
     let togglePause: () -> Void
 
     var body: some View {
@@ -1199,13 +1193,6 @@ private struct HUDActionCluster: View {
                 action: togglePause
             )
             .disabled(isDisabled)
-
-            HUDIconButton(
-                systemName: "trophy.fill",
-                foreground: LumenBrandColor.gold,
-                accessibilityKey: "achievements.title",
-                action: openAchievements
-            )
 
             HUDIconButton(
                 systemName: "gearshape.fill",
@@ -1223,41 +1210,67 @@ private struct HUDActionCluster: View {
     }
 }
 
-private struct RelayStatusStrip: View {
+private struct RelayProgressPanel: View {
     @EnvironmentObject private var gameState: GameState
 
+    private var routeProgress: Double {
+        guard gameState.stageTargetScore > 0 else { return 0 }
+        return min(1, max(0, Double(gameState.displayedScore) / Double(gameState.stageTargetScore)))
+    }
+
     var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
+        VStack(alignment: .leading, spacing: 5) {
             HStack(spacing: 6) {
-                RelayStatusChip(
-                    systemName: "point.3.connected.trianglepath.dotted",
-                    text: String(format: NSLocalizedString("hud.route", comment: ""), gameState.stage),
-                    color: gameState.selectedTheme.accentColor
-                )
+                Image(systemName: "point.3.connected.trianglepath.dotted")
+                    .font(.caption2.weight(.black))
+                    .foregroundStyle(gameState.selectedTheme.accentColor)
 
-                RelayStatusChip(
-                    systemName: "scope",
-                    text: String(format: NSLocalizedString("hud.goal", comment: ""), gameState.stageTargetScore),
-                    color: LumenBrandColor.gold
-                )
+                Text(String(format: NSLocalizedString("hud.route", comment: ""), gameState.stage))
+                    .foregroundStyle(.white.opacity(0.9))
 
-                RelayStatusChip(
-                    systemName: "waveform.path.ecg",
-                    text: String(format: NSLocalizedString("hud.level", comment: ""), gameState.displayedLevel),
-                    color: LumenBrandColor.teal
-                )
+                Text(String(format: NSLocalizedString("hud.goal", comment: ""), gameState.stageTargetScore))
+                    .foregroundStyle(LumenBrandColor.gold.opacity(0.9))
 
                 if gameState.displayedMultiplier > 1 {
-                    RelayStatusChip(
-                        systemName: "bolt.fill",
-                        text: "x\(gameState.displayedMultiplier)",
-                        color: LumenBrandColor.magenta
-                    )
+                    Text("x\(gameState.displayedMultiplier)")
+                        .foregroundStyle(LumenBrandColor.magenta)
+                }
+
+                Spacer(minLength: 0)
+            }
+            .font(.caption2.weight(.black))
+            .monospacedDigit()
+            .lineLimit(1)
+            .minimumScaleFactor(0.72)
+
+            GeometryReader { proxy in
+                ZStack(alignment: .leading) {
+                    Capsule()
+                        .fill(.white.opacity(0.12))
+
+                    Capsule()
+                        .fill(
+                            LinearGradient(
+                                colors: [
+                                    gameState.selectedTheme.accentColor,
+                                    LumenBrandColor.gold
+                                ],
+                                startPoint: .leading,
+                                endPoint: .trailing
+                            )
+                        )
+                        .frame(width: max(8, proxy.size.width * routeProgress))
                 }
             }
-            .padding(.vertical, 1)
+            .frame(height: 5)
         }
-        .frame(height: 30)
+        .padding(.horizontal, 9)
+        .frame(height: 34)
+        .background(.black.opacity(0.18), in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+        .overlay {
+            RoundedRectangle(cornerRadius: 8, style: .continuous)
+                .stroke(gameState.selectedTheme.accentColor.opacity(0.22), lineWidth: 1)
+        }
         .layoutPriority(1)
     }
 }
