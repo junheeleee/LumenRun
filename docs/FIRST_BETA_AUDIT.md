@@ -210,6 +210,9 @@ Concrete tasks:
 Acceptance:
 - A tester can recognize the game from icon, title, and in-run visuals as one coherent product.
 
+Progress:
+- 2026-06-01: Simplified the returning-player start screen by hiding the basic briefing strip after onboarding and reducing the animated background signal opacity so the title screen competes less with in-game orbit language.
+
 ### 9. Audio Feedback
 
 Problem:

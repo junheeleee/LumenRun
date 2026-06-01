@@ -1471,7 +1471,9 @@ private struct StartView: View {
         VStack(spacing: 18) {
             StartHeroView()
 
-            StartBriefingStrip()
+            if !gameState.hasSeenTutorial || gameState.totalRecordedRuns == 0 {
+                StartBriefingStrip()
+            }
 
             Button(action: start) {
                 Label("start.play", systemImage: "play.fill")
@@ -1503,7 +1505,7 @@ private struct StartScreenBackdrop: View {
             )
 
             LumenSignalField()
-                .opacity(0.16)
+                .opacity(0.08)
 
             RadialGradient(
                 colors: [
