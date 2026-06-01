@@ -635,6 +635,37 @@ private struct ModuleSocketMark: View {
     }
 }
 
+private struct ModuleContactRail: View {
+    let color: Color
+    let isRisk: Bool
+    let level: Int
+
+    var body: some View {
+        HStack(spacing: 4) {
+            ForEach(0..<9, id: \.self) { index in
+                RoundedRectangle(cornerRadius: 1.5, style: .continuous)
+                    .fill(contactColor(at: index))
+                    .frame(maxWidth: .infinity)
+                    .frame(height: index == 4 ? 5 : 3)
+            }
+        }
+        .frame(height: 10)
+        .accessibilityHidden(true)
+    }
+
+    private func contactColor(at index: Int) -> Color {
+        if isRisk && (index == 1 || index == 7) {
+            return LumenBrandColor.magenta.opacity(0.92)
+        }
+
+        if level > 0 && index <= min(level + 1, 8) {
+            return color.opacity(0.86)
+        }
+
+        return color.opacity(index == 4 ? 0.62 : 0.28)
+    }
+}
+
 private struct RunUpgradeView: View {
     @EnvironmentObject private var gameState: GameState
     @State private var isSelectionEnabled = false
@@ -767,6 +798,9 @@ private struct RunUpgradeView: View {
                             .foregroundStyle(isSelectionEnabled ? .white : .white.opacity(0.42))
                             .disabled(!isSelectionEnabled)
                         }
+
+                        ModuleContactRail(color: roleTag.roleColor, isRisk: choice.rarity == .risk, level: currentLevel)
+                            .padding(.horizontal, 4)
                     }
                     .padding(12)
                     .frame(maxWidth: .infinity, minHeight: 126, alignment: .leading)
@@ -775,6 +809,13 @@ private struct RunUpgradeView: View {
                     .overlay {
                         RoundedRectangle(cornerRadius: LumenDesign.cornerRadius, style: .continuous)
                             .stroke(rarityColor(choice.rarity).opacity(choice.rarity == .common ? 0.18 : 0.52), lineWidth: 1)
+                    }
+                    .overlay(alignment: .leading) {
+                        Capsule()
+                            .fill(choice.kind.primaryTag.roleColor.opacity(choice.rarity == .risk ? 0.95 : 0.72))
+                            .frame(width: 3)
+                            .padding(.vertical, 13)
+                            .padding(.leading, 6)
                     }
                 }
             }
