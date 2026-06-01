@@ -759,3 +759,30 @@ Validation:
 
 Next check:
 - Play Routes 3-5 and verify Pulse, Gate, and Void routes feel mechanically different, not just faster.
+
+### 2026-06-01: Second Beta Checklist Closeout
+
+Checklist:
+- 6/10 - Achievements and Daily Missions.
+- 7/10 - Social Comparison.
+- 8/10 - Start, Loading, Icon, and IP Cohesion.
+- 9/10 - Audio Feedback, UI, and Localization.
+- 10/10 - Full build and static validation.
+
+Changes:
+- Improved daily mission and reward visibility with a next-reward progress bar that includes both themes and core skins.
+- Added an offline local comparison summary for free/dev builds: total runs, best score, recent average, and achievement completion.
+- Simplified the returning-player start screen by hiding the basic briefing strip after onboarding and reducing background signal opacity.
+- Added a dedicated void-break sound path and bundled `voidbreak.wav` so combo disruption has distinct audio feedback.
+
+Validation:
+- `git diff --check` passed.
+- `plutil -lint` passed for the Xcode project and both localization files.
+- Static search found no active `TODO`, `FIXME`, `try!`, `as!`, or runtime `UIScreen.main` usage. The only `UIScreen.main` hit is this audit note documenting its prior removal.
+- `xcodebuild -project LumenRun.xcodeproj -scheme LumenRun -destination 'generic/platform=iOS Simulator' build` succeeded during each checklist step.
+- `xcodebuild -project LumenRun.xcodeproj -scheme LumenRun -configuration Release -destination 'generic/platform=iOS Simulator' build` succeeded and copied `voidbreak.wav` into the app bundle.
+
+Remaining device-only checks:
+- Real iPhone 5-minute soak test.
+- Real audio balance check with sound on/off.
+- Touch feel for stage clear, card selection, pause, retry, and longer Stage 3+ runs.
