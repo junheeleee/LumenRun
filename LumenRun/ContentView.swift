@@ -31,23 +31,7 @@ struct ContentView: View {
                 LoadingView()
                     .transition(.opacity)
             } else if gameState.isStartScreenPresented {
-                ZStack {
-                    StartScreenBackdrop()
-                        .ignoresSafeArea()
-
-                    ScrollView(.vertical, showsIndicators: true) {
-                        StartView {
-                            gameState.startRun()
-                        } showRewards: {
-                            gameState.showRewards()
-                        } showObjectGuide: {
-                            isObjectGuidePresented = true
-                        }
-                        .padding(24)
-                    }
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .transition(.scale.combined(with: .opacity))
+                startScreen
             }
         }
         .background(
@@ -115,6 +99,36 @@ struct ContentView: View {
         let scene = GameScene(state: gameState)
         scene.scaleMode = .resizeFill
         return scene
+    }
+
+    private var startScreen: some View {
+        ZStack {
+            StartScreenBackdrop()
+                .ignoresSafeArea()
+
+            ScrollView(.vertical, showsIndicators: true) {
+                StartView(
+                    start: {
+                        gameState.startRun()
+                    },
+                    showRewards: {
+                        gameState.showRewards()
+                    },
+                    showRecords: {
+                        isRecordsPresented = true
+                    },
+                    showObjectGuide: {
+                        isObjectGuidePresented = true
+                    },
+                    showSettings: {
+                        gameState.pauseForSettings()
+                    }
+                )
+                .padding(24)
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .transition(.scale.combined(with: .opacity))
     }
 
     private var gameOverlay: some View {
@@ -1464,7 +1478,7 @@ private struct LoadingView: View {
                 .ignoresSafeArea()
 
             LumenSignalField()
-                .opacity(0.54)
+                .opacity(0.22)
                 .ignoresSafeArea()
 
             VStack(spacing: 18) {
@@ -1500,10 +1514,12 @@ private struct StartView: View {
     @EnvironmentObject private var gameState: GameState
     let start: () -> Void
     let showRewards: () -> Void
+    let showRecords: () -> Void
     let showObjectGuide: () -> Void
+    let showSettings: () -> Void
 
     var body: some View {
-        VStack(spacing: 18) {
+        VStack(spacing: 16) {
             StartHeroView()
 
             if !gameState.hasSeenTutorial || gameState.totalRecordedRuns == 0 {
@@ -1517,12 +1533,64 @@ private struct StartView: View {
             }
             .buttonStyle(LumenPrimaryButtonStyle(color: gameState.selectedTheme.accentColor))
 
-            HStack(spacing: 10) {
-                StartActionButton(title: "rewards.title", systemImage: "gift.fill", action: showRewards)
-                StartActionButton(title: "objects.title", systemImage: "scope", action: showObjectGuide)
-            }
+            StartUtilityDock(
+                showRewards: showRewards,
+                showRecords: showRecords,
+                showObjectGuide: showObjectGuide,
+                showSettings: showSettings
+            )
         }
         .padding(.vertical, 28)
+    }
+}
+
+private struct StartUtilityDock: View {
+    let showRewards: () -> Void
+    let showRecords: () -> Void
+    let showObjectGuide: () -> Void
+    let showSettings: () -> Void
+
+    var body: some View {
+        HStack(spacing: 8) {
+            StartUtilityButton(title: "rewards.title", systemImage: "gift.fill", action: showRewards)
+            StartUtilityButton(title: "records.title", systemImage: "chart.bar.fill", action: showRecords)
+            StartUtilityButton(title: "objects.title", systemImage: "scope", action: showObjectGuide)
+            StartUtilityButton(title: "settings.title", systemImage: "gearshape.fill", action: showSettings)
+        }
+        .padding(6)
+        .background(.black.opacity(0.16), in: RoundedRectangle(cornerRadius: LumenDesign.cornerRadius, style: .continuous))
+        .overlay {
+            RoundedRectangle(cornerRadius: LumenDesign.cornerRadius, style: .continuous)
+                .stroke(.white.opacity(0.12), lineWidth: 1)
+        }
+    }
+}
+
+private struct StartUtilityButton: View {
+    let title: LocalizedStringKey
+    let systemImage: String
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            VStack(spacing: 4) {
+                Image(systemName: systemImage)
+                    .font(.headline.weight(.black))
+                Text(title)
+                    .font(LumenDesign.compactLabel)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.62)
+            }
+            .frame(maxWidth: .infinity)
+            .frame(height: 46)
+        }
+        .buttonStyle(.plain)
+        .foregroundStyle(.white.opacity(0.82))
+        .background(.white.opacity(0.07), in: RoundedRectangle(cornerRadius: LumenDesign.cornerRadius, style: .continuous))
+        .overlay {
+            RoundedRectangle(cornerRadius: LumenDesign.cornerRadius, style: .continuous)
+                .stroke(.white.opacity(0.12), lineWidth: 1)
+        }
     }
 }
 
@@ -2072,21 +2140,6 @@ private struct LumenSecondaryButtonStyle: ButtonStyle {
                 RoundedRectangle(cornerRadius: LumenDesign.cornerRadius, style: .continuous)
                     .stroke(color.opacity(configuration.isPressed ? 0.42 : 0.24), lineWidth: 1)
             }
-    }
-}
-
-private struct StartActionButton: View {
-    let title: LocalizedStringKey
-    let systemImage: String
-    let action: () -> Void
-
-    var body: some View {
-        Button(action: action) {
-            Label(title, systemImage: systemImage)
-                .lineLimit(1)
-                .minimumScaleFactor(0.76)
-        }
-        .buttonStyle(LumenSecondaryButtonStyle(color: .white))
     }
 }
 

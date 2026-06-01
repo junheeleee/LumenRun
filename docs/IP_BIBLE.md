@@ -80,6 +80,7 @@ Internal implementation names can stay as code terms, but user-facing text shoul
 
 - Corner radius stays at 8px or lower. Lumen Run should feel like a compact game interface, not a soft productivity app.
 - Primary actions use the Lumen gold-to-accent gradient. Secondary actions stay dark, thin, and outlined.
+- The start screen must keep one dominant CTA: Start Relay. Rewards, records, object guide, and settings belong in a lower-priority utility dock.
 - Large display text is reserved for the title, route clear, Oversync, and final score. Dense panels use compact labels and monospaced numbers.
 - Relay Module cards should read like hardware slots: role header, icon, rarity/tag chips, effect text, and a clear pick action.
 - Risk modules should always show a visible warning color or socket mark before the player reads the detailed text.
