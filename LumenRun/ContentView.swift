@@ -601,6 +601,29 @@ private struct RouteFlowStep: View {
     }
 }
 
+private struct ModuleSocketMark: View {
+    let color: Color
+    let isRisk: Bool
+
+    var body: some View {
+        HStack(spacing: 4) {
+            ForEach(0..<3, id: \.self) { index in
+                RoundedRectangle(cornerRadius: 2, style: .continuous)
+                    .fill(index == 1 && isRisk ? LumenBrandColor.magenta.opacity(0.9) : color.opacity(index == 0 ? 0.95 : 0.42))
+                    .frame(width: 10, height: 5)
+            }
+        }
+        .padding(.horizontal, 7)
+        .frame(height: 18)
+        .background(.black.opacity(0.18), in: Capsule())
+        .overlay {
+            Capsule()
+                .stroke(color.opacity(0.24), lineWidth: 1)
+        }
+        .accessibilityHidden(true)
+    }
+}
+
 private struct RunUpgradeView: View {
     @EnvironmentObject private var gameState: GameState
     @State private var isSelectionEnabled = false
@@ -617,14 +640,26 @@ private struct RunUpgradeView: View {
                         let roleTag = choice.kind.primaryTag
                         let currentLevel = gameState.runUpgradeCounts[choice.kind, default: 0]
 
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 8, style: .continuous)
-                                .fill(roleTag.roleColor.opacity(0.15))
-                                .frame(height: 48)
-
+                        HStack(spacing: 10) {
                             Image(systemName: roleTag.iconName)
-                                .font(.system(size: 24, weight: .semibold))
+                                .font(.system(size: 20, weight: .black))
                                 .foregroundStyle(roleTag.roleColor)
+
+                            Text(LocalizedStringKey(roleTag.titleKey))
+                                .font(LumenDesign.compactLabel)
+                                .foregroundStyle(roleTag.roleColor)
+                                .textCase(.uppercase)
+
+                            Spacer(minLength: 0)
+
+                            ModuleSocketMark(color: roleTag.roleColor, isRisk: choice.rarity == .risk)
+                        }
+                        .padding(.horizontal, 11)
+                        .frame(height: 44)
+                        .background(roleTag.roleColor.opacity(0.13), in: RoundedRectangle(cornerRadius: LumenDesign.cornerRadius, style: .continuous))
+                        .overlay {
+                            RoundedRectangle(cornerRadius: LumenDesign.cornerRadius, style: .continuous)
+                                .stroke(roleTag.roleColor.opacity(choice.rarity == .risk ? 0.46 : 0.26), lineWidth: 1)
                         }
                         .padding(.horizontal, 4)
                         .padding(.top, 4)
@@ -724,10 +759,10 @@ private struct RunUpgradeView: View {
                     }
                     .padding(12)
                     .frame(maxWidth: .infinity, minHeight: 126, alignment: .leading)
-                    .background(rarityColor(choice.rarity).opacity(0.08), in: RoundedRectangle(cornerRadius: 8, style: .continuous))
-                    .background(.white.opacity(0.07), in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                    .background(rarityColor(choice.rarity).opacity(0.08), in: RoundedRectangle(cornerRadius: LumenDesign.cornerRadius, style: .continuous))
+                    .background(LumenDesign.panelFill, in: RoundedRectangle(cornerRadius: LumenDesign.cornerRadius, style: .continuous))
                     .overlay {
-                        RoundedRectangle(cornerRadius: 8, style: .continuous)
+                        RoundedRectangle(cornerRadius: LumenDesign.cornerRadius, style: .continuous)
                             .stroke(rarityColor(choice.rarity).opacity(choice.rarity == .common ? 0.18 : 0.52), lineWidth: 1)
                     }
                 }
@@ -735,9 +770,9 @@ private struct RunUpgradeView: View {
         }
         .padding(18)
         .frame(maxWidth: 430)
-        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: LumenDesign.cornerRadius, style: .continuous))
         .overlay {
-            RoundedRectangle(cornerRadius: 8, style: .continuous)
+            RoundedRectangle(cornerRadius: LumenDesign.cornerRadius, style: .continuous)
                 .stroke(gameState.selectedTheme.accentColor.opacity(0.42), lineWidth: 1)
         }
         .shadow(color: .black.opacity(0.32), radius: 22, x: 0, y: 12)
@@ -821,12 +856,12 @@ private struct StartCardSelectionView: View {
 
                 VStack(alignment: .leading, spacing: 3) {
                     Text("startCard.eyebrow")
-                        .font(.caption.weight(.black))
+                        .font(LumenDesign.sectionLabel)
                         .foregroundStyle(gameState.selectedTheme.accentColor)
                         .textCase(.uppercase)
 
                     Text("startCard.title")
-                        .font(.title2.weight(.black))
+                        .font(LumenDesign.screenTitle)
                         .foregroundStyle(.white)
 
                     Text("startCard.subtitle")
@@ -845,9 +880,9 @@ private struct StartCardSelectionView: View {
         }
         .padding(18)
         .frame(maxWidth: 430)
-        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: LumenDesign.cornerRadius, style: .continuous))
         .overlay {
-            RoundedRectangle(cornerRadius: 8, style: .continuous)
+            RoundedRectangle(cornerRadius: LumenDesign.cornerRadius, style: .continuous)
                 .stroke(gameState.selectedTheme.accentColor.opacity(0.42), lineWidth: 1)
         }
         .shadow(color: .black.opacity(0.35), radius: 24, x: 0, y: 12)
@@ -905,12 +940,12 @@ private struct StartCardButton: View {
                 Spacer(minLength: 0)
             }
             .padding(12)
-            .background(categoryColor.opacity(0.1), in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+            .background(categoryColor.opacity(0.1), in: RoundedRectangle(cornerRadius: LumenDesign.cornerRadius, style: .continuous))
             .overlay {
-                RoundedRectangle(cornerRadius: 8, style: .continuous)
+                RoundedRectangle(cornerRadius: LumenDesign.cornerRadius, style: .continuous)
                     .stroke(categoryColor.opacity(choice.category == .risk ? 0.48 : 0.28), lineWidth: 1)
             }
-            .contentShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+            .contentShape(RoundedRectangle(cornerRadius: LumenDesign.cornerRadius, style: .continuous))
         }
         .buttonStyle(.plain)
     }
@@ -1477,12 +1512,10 @@ private struct StartView: View {
 
             Button(action: start) {
                 Label("start.play", systemImage: "play.fill")
-                    .font(.headline.weight(.bold))
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 14)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.82)
             }
-            .buttonStyle(.borderedProminent)
-            .tint(gameState.selectedTheme.accentColor)
+            .buttonStyle(LumenPrimaryButtonStyle(color: gameState.selectedTheme.accentColor))
 
             HStack(spacing: 10) {
                 StartActionButton(title: "rewards.title", systemImage: "gift.fill", action: showRewards)
@@ -1598,7 +1631,7 @@ private struct StartHeroView: View {
                 .tracking(1.8)
 
             Text("app.title")
-                .font(.system(size: 52, weight: .black, design: .rounded))
+                .font(LumenDesign.heroTitle)
                 .foregroundStyle(
                     LinearGradient(
                         colors: gameState.selectedTheme.feverColors,
@@ -1610,7 +1643,7 @@ private struct StartHeroView: View {
                 .shadow(color: gameState.selectedTheme.accentColor.opacity(0.35), radius: 18, x: 0, y: 10)
 
             Text("start.subtitle")
-                .font(.headline.weight(.semibold))
+                .font(LumenDesign.body)
                 .foregroundStyle(.white.opacity(0.72))
                 .multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)
@@ -1980,6 +2013,68 @@ private enum LumenBrandColor {
     static let purple = Color(red: 0.48, green: 0.12, blue: 0.72)
 }
 
+private enum LumenDesign {
+    static let cornerRadius: CGFloat = 8
+    static let heroTitle = Font.system(size: 52, weight: .black, design: .rounded)
+    static let screenTitle = Font.title2.weight(.black)
+    static let sectionLabel = Font.caption.weight(.black)
+    static let body = Font.headline.weight(.semibold)
+    static let compactLabel = Font.caption2.weight(.black)
+    static let number = Font.headline.weight(.black)
+
+    static var panelFill: Color {
+        .white.opacity(0.08)
+    }
+
+    static var innerFill: Color {
+        .black.opacity(0.16)
+    }
+}
+
+private struct LumenPrimaryButtonStyle: ButtonStyle {
+    let color: Color
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .font(.headline.weight(.black))
+            .foregroundStyle(.black.opacity(0.88))
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 14)
+            .background(
+                LinearGradient(
+                    colors: [LumenBrandColor.gold, color.opacity(0.95)],
+                    startPoint: .leading,
+                    endPoint: .trailing
+                ),
+                in: RoundedRectangle(cornerRadius: LumenDesign.cornerRadius, style: .continuous)
+            )
+            .overlay {
+                RoundedRectangle(cornerRadius: LumenDesign.cornerRadius, style: .continuous)
+                    .stroke(.white.opacity(0.34), lineWidth: 1)
+            }
+            .shadow(color: color.opacity(configuration.isPressed ? 0.16 : 0.32), radius: configuration.isPressed ? 5 : 14, x: 0, y: configuration.isPressed ? 3 : 8)
+            .scaleEffect(configuration.isPressed ? 0.985 : 1)
+    }
+}
+
+private struct LumenSecondaryButtonStyle: ButtonStyle {
+    let color: Color
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .font(.subheadline.weight(.black))
+            .foregroundStyle(.white.opacity(configuration.isPressed ? 0.72 : 0.9))
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 12)
+            .padding(.horizontal, 10)
+            .background(color.opacity(configuration.isPressed ? 0.12 : 0.08), in: RoundedRectangle(cornerRadius: LumenDesign.cornerRadius, style: .continuous))
+            .overlay {
+                RoundedRectangle(cornerRadius: LumenDesign.cornerRadius, style: .continuous)
+                    .stroke(color.opacity(configuration.isPressed ? 0.42 : 0.24), lineWidth: 1)
+            }
+    }
+}
+
 private struct StartActionButton: View {
     let title: LocalizedStringKey
     let systemImage: String
@@ -1988,20 +2083,10 @@ private struct StartActionButton: View {
     var body: some View {
         Button(action: action) {
             Label(title, systemImage: systemImage)
-                .font(.subheadline.weight(.black))
                 .lineLimit(1)
                 .minimumScaleFactor(0.76)
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 12)
-                .padding(.horizontal, 10)
         }
-        .buttonStyle(.plain)
-        .foregroundStyle(.white)
-        .background(.white.opacity(0.1), in: RoundedRectangle(cornerRadius: 8, style: .continuous))
-        .overlay {
-            RoundedRectangle(cornerRadius: 8, style: .continuous)
-                .stroke(.white.opacity(0.2), lineWidth: 1)
-        }
+        .buttonStyle(LumenSecondaryButtonStyle(color: .white))
     }
 }
 
@@ -2556,12 +2641,12 @@ private struct ResultStatCard: View {
 
             VStack(alignment: .leading, spacing: 2) {
                 Text(title)
-                    .font(.caption2.weight(.black))
+                    .font(LumenDesign.compactLabel)
                     .foregroundStyle(.white.opacity(0.55))
                     .lineLimit(1)
                     .minimumScaleFactor(0.75)
                 Text(value)
-                    .font(.headline.weight(.black))
+                    .font(LumenDesign.number)
                     .foregroundStyle(.white)
                     .monospacedDigit()
             }
@@ -2569,7 +2654,7 @@ private struct ResultStatCard: View {
         }
         .padding(10)
         .frame(maxWidth: .infinity)
-        .background(.black.opacity(0.16), in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+        .background(LumenDesign.innerFill, in: RoundedRectangle(cornerRadius: LumenDesign.cornerRadius, style: .continuous))
     }
 }
 

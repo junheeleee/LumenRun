@@ -76,6 +76,15 @@ Internal implementation names can stay as code terms, but user-facing text shoul
 - Void Gates should use interrupted purple arc language and a broken-signal mark, not the same danger frame as lethal hazards.
 - Background signal lines may exist, but they should stay subtle so they do not compete with the core silhouette.
 
+## UI Design Rules
+
+- Corner radius stays at 8px or lower. Lumen Run should feel like a compact game interface, not a soft productivity app.
+- Primary actions use the Lumen gold-to-accent gradient. Secondary actions stay dark, thin, and outlined.
+- Large display text is reserved for the title, route clear, Oversync, and final score. Dense panels use compact labels and monospaced numbers.
+- Relay Module cards should read like hardware slots: role header, icon, rarity/tag chips, effect text, and a clear pick action.
+- Risk modules should always show a visible warning color or socket mark before the player reads the detailed text.
+- HUD and results panels should prefer functional scan speed over decoration.
+
 ## Audio Language
 
 - The core music identity is fast, bright, synthetic, and loopable: signal pulses over a dark orbital bed.
